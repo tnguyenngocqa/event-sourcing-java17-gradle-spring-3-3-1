@@ -1,0 +1,38 @@
+server:
+  port: 9001
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://discoveryserver:8761/eureka}
+
+spring:
+  application:
+    name: bookservice
+  h2:
+    console:
+      enabled: true
+      path: /h2-console # Console will be available at http://localhost:8080/h2-console
+      settings:
+        web-allow-others: true
+  datasource:
+    url: jdbc:h2:mem:bookDB # In-memory database named 'bookDB'
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:  # Default username is 'sa', password can be left blank
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update # Automatically creates/updates tables based on entities
+#    show-sql: true
+
+axon:
+  axonserver:
+    servers: axonserver:8124 # Connect to Axon Server on this address
+

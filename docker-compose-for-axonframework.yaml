@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  axonserver:
+    image: axoniq/axonserver:latest
+    container_name: axonserver
+    ports:
+      - "8024:8024"
+      - "8124:8124"
+    environment:
+      AXONIQ_AXONSERVER_STANDALONE: "true" # Set to true for standalone mode
+      AXONIQ_AXONSERVER_HOSTNAME: "localhost" # Ensures clients can connect
+    # volumes:
+    #   - ./data:/data
+    #   - ./events:/events
+    #   - ./config:/config

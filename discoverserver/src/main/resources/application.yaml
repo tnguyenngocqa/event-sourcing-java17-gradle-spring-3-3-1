@@ -1,0 +1,15 @@
+server:
+  port: 8761 # The default port for Eureka server is 8761
+
+spring:
+  application:
+    name: discoverserver # Logical name of the application
+
+eureka:
+  client:
+    register-with-eureka: false # The server itself doesn't need to register in its own registry
+    fetch-registry: false # The server doesn't need to fetch a list of registered services
+logging:
+  level:
+    com.netflix.eureka: OFF
+    com.netflix.discovery: OFF

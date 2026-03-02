@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableDiscoveryClient
 @ComponentScan(value = {
 		"com.ltfullstack.employeeservice",
-//		"com.ltfullstack.commonservice"
+		"com.ltfullstack.commonservice"
 })
 public class EmployeeServiceApplication {
 

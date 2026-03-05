@@ -1,0 +1,38 @@
+server:
+  port: 8080 # Gateway port
+
+spring:
+  application:
+    name: apigateway
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  cloud:
+    gateway:
+      discover:
+        locator:
+          enabled: true
+      routes:
+        - id: employeeservice
+          uri: lb://employeeservice
+          predicates:
+            - Path=/api/v1/employees/** # Matches requests starting with /api/v1/employees
+          filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 5
+                redis-rate-limiter.burstCapacity: 10
+                redis-rate-limiter.requestedTokens: 1 # Cost of each request, defaults to 1
+            - KeyAuthFilter
+
+eureka:
+  instance:
+    hostname: localhost # Explicitly sets the hostname to localhost
+  client:
+    register-with-eureka: true # The gateway registers itself with the Eureka server
+    fetch-registry: true # The gateway fetches the registry from the Eureka server
+    service-url:
+      defaultZone: http://localhost:8761/eureka # Eureka server address
+
+apiKey: ltfullstack

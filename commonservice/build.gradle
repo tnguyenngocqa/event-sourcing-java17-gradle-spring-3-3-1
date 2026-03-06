@@ -1,14 +1,26 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.3.1'
-	id 'io.spring.dependency-management' version '1.1.7'
+//	id 'java-library'
+//	id 'maven-publish'
+//	id 'java'
+//	id 'org.springframework.boot' version '3.3.1'
+//	id 'io.spring.dependency-management' version '1.1.7'
 
+	id 'java-library'
 	id 'maven-publish'
+	id 'org.springframework.boot' version '3.3.1'
+	id 'io.spring.dependency-management' version '1.1.5'
 }
 
 group = 'com.ltfullstack'
 version = '1.0.0'
 description = 'Demo project for Spring Boot'
+
+// Crucial: This tells the plugin to actually write dependencies to the POM
+dependencyManagement {
+	generatedPomCustomization {
+		enabled = true
+	}
+}
 
 java {
 	toolchain {
@@ -27,8 +39,21 @@ repositories {
 	mavenLocal()
 }
 
+
+// 1. RE-ENABLE the standard jar task
+jar {
+	enabled = true
+	archiveClassifier = '' // Ensures the jar name is exactly 'commonservice-1.0.0.jar'
+}
+
+// 2. DISABLE the bootJar task (libraries don't need to be executable)
+bootJar {
+	enabled = false
+}
+
 dependencies {
-	implementation 'org.springframework.kafka:spring-kafka'
+	// Using 'api' makes spring-kafka available to any service that depends on 'common'
+	api 'org.springframework.kafka:spring-kafka'
 
 	// spring-boot-starter-aop
 	implementation("org.springframework.boot:spring-boot-starter-aop")
@@ -41,20 +66,40 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
+//publishing {
+//	publications {
+//		mavenJava(MavenPublication) {
+//			artifact jar
+//
+//			// Optional: customize artifactId if different from project name
+////			groupId = 'com.ltfullstack'
+//			artifactId = 'commonservice'
+////			version = '1.0.0'
+//		}
+//	}
+//}
 publishing {
 	publications {
 		mavenJava(MavenPublication) {
-			// This tells Gradle to publish the executable JAR
-			artifact bootJar
-
-			// Optional: set specific coordinates
-			groupId = 'com.ltfullstack'
+//			from components.java
+			artifact jar
 			artifactId = 'commonservice'
-			version = '1.0.0'
+
+			// MANUAL FIX: Force dependencies into the POM if they are missing
+			pom.withXml {
+				def dependenciesNode = asNode().appendNode('dependencies')
+				configurations.api.allDependencies.each {
+					def dependencyNode = dependenciesNode.appendNode('dependency')
+					dependencyNode.appendNode('groupId', it.group)
+					dependencyNode.appendNode('artifactId', it.name)
+					// Use a version if specified, otherwise pull from dependency management
+					dependencyNode.appendNode('version', it.version ?: '3.2.1')
+					dependencyNode.appendNode('scope', 'compile')
+				}
+			}
 		}
 	}
 }
-
 tasks.named('test') {
 	useJUnitPlatform()
 }

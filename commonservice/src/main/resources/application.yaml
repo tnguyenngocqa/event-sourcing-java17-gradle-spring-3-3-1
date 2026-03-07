@@ -2,6 +2,7 @@ spring:
   application:
     name: commonservice
 
+
   kafka:
     bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:broker:9092}
     producer:
@@ -12,3 +13,18 @@ spring:
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: dotanthanhvlog@gmail.com
+    password: jyrz vggt pzxp taot
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+#        transport:
+#          protocol: smtp

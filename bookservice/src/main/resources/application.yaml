@@ -27,7 +27,7 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: create-drop # Automatically creates/updates tables based on entities
+      ddl-auto: create # Automatically creates/updates tables based on entities
 #    show-sql: true
 
 #axon:

@@ -82,8 +82,10 @@ public class BorrowingSaga {
 
     private void rollBackBookStatus(String bookId, String employeeId, String borrowingId) {
         SagaLifecycle.associateWith("bookId", bookId);
+        log.info("RollBackStatusBookCommand started for BookId: {}, EmployeeId: {}, BorrowingId: {}", bookId, employeeId, borrowingId);
         RollBackStatusBookCommand command = new RollBackStatusBookCommand(bookId, true, employeeId, borrowingId);
         commandGateway.sendAndWait(command);
+        log.info("RollBackStatusBookCommand end");
     }
 
     @SagaEventHandler(associationProperty = "bookId")

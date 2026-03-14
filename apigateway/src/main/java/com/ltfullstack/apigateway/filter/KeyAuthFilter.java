@@ -60,7 +60,7 @@ public class KeyAuthFilter extends AbstractGatewayFilterFactory<KeyAuthFilter.Co
                         "  \"message\": \"%s\",\n" +
                         "  \"path\": \"%s\"" +
                         "}",
-                java.time.ZonedDateTime.now().toString(),
+                java.time.ZonedDateTime.now(),
                 status.value(),
                 status.getReasonPhrase(),
                 message,

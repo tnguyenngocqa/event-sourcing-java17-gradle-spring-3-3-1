@@ -15,14 +15,12 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/borrowing")
 public class BorrowingController {
-
     @Autowired
     private CommandGateway commandGateway;
 
     @PostMapping
-    public String createBorrowing(@RequestBody BorrowingCreateModel request) {
-        CreateBorrowingCommand command = new CreateBorrowingCommand(
-                UUID.randomUUID().toString(), request.getBookId(), request.getEmployeeId(), new Date());
+    public String createBorrowing(@RequestBody BorrowingCreateModel model) {
+        CreateBorrowingCommand command = new CreateBorrowingCommand(UUID.randomUUID().toString(), model.getBookId(), model.getEmployeeId(), new Date());
         return commandGateway.sendAndWait(command);
     }
 }

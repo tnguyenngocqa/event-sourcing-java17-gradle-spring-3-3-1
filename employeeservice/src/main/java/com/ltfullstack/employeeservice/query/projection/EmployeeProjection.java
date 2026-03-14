@@ -1,10 +1,10 @@
 package com.ltfullstack.employeeservice.query.projection;
 
+import com.ltfullstack.commonservice.queries.GetDetailEmployeeQuery;
 import com.ltfullstack.employeeservice.command.data.Employee;
 import com.ltfullstack.employeeservice.command.data.EmployeeRepository;
 import com.ltfullstack.employeeservice.query.model.EmployeeResponseModel;
 import com.ltfullstack.employeeservice.query.quries.GetAllEmployeeQuery;
-import com.ltfullstack.employeeservice.query.quries.GetDetailEmployeeQuery;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

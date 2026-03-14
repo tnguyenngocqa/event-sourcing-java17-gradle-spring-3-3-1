@@ -55,6 +55,9 @@ dependencies {
 	// Using 'api' makes spring-kafka available to any service that depends on 'common'
 	api 'org.springframework.kafka:spring-kafka'
 
+	// axon-spring-boot-starter
+	implementation("org.axonframework:axon-spring-boot-starter:4.9.3")
+
 	// spring-boot-starter-aop
 	implementation("org.springframework.boot:spring-boot-starter-aop")
 

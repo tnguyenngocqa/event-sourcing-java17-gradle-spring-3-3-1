@@ -1,21 +1,17 @@
-package com.ltfullstack.borrowingservice.command.command;
+package com.ltfullstack.commonservice.command;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
-import java.util.Date;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateBorrowingCommand {
+public class UpdateStatusBookCommand {
     @TargetAggregateIdentifier
-    private String id;
-
     private String bookId;
+    private Boolean isReady;
     private String employeeId;
-    private Date borrowingDate;
-
+    private String borrowingId;
 }

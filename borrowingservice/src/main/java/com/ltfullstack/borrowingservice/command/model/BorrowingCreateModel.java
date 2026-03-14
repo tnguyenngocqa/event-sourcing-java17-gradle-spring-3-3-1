@@ -7,9 +7,11 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class BorrowingCreateModel {
+
     private String bookId;
     private String employeeId;
+
 }

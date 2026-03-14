@@ -1,18 +1,15 @@
-package com.ltfullstack.borrowingservice.command.event;
+package com.ltfullstack.commonservice.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BorrowingCreatedEvent {
-    private String id;
-
+public class BookUpdateStatusEvent {
     private String bookId;
+    private Boolean isReady;
     private String employeeId;
-    private Date borrowingDate;
+    private String borrowingId;
 }

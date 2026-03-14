@@ -12,11 +12,12 @@ import java.util.Date;
 @Entity
 @Table(name = "borrowing")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class Borrowing {
     @Id
     private String id;
+
     private String bookId;
     private String employeeId;
     private Date borrowingDate;

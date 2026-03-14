@@ -9,8 +9,8 @@ WORKDIR /app
 
 # Sao chép mã nguồn ứng dụng commonservice files to container
 COPY ./commonservice ./commonservice
-# Sao chép mã nguồn ứng dụng bookservice files to container
-COPY ./bookservice ./bookservice
+# Sao chép mã nguồn ứng dụng notificationservice files to container
+COPY ./notificationservice ./notificationservice
 
 
 # Thiết lập thư mục làm việc trong container under /app/commonservice
@@ -22,8 +22,8 @@ ENV SPRING_PROFILES_ACTIVE=dev
 # Cài đặt các dependencies và tạo jar file thực thi
 RUN ./gradlew clean bootJar publishToMavenLocal
 
-# Thiết lập thư mục làm việc trong container under /app/bookservice
-WORKDIR /app/bookservice
+# Thiết lập thư mục làm việc trong container under /app/notificationservice
+WORKDIR /app/notificationservice
 
 # Cài đặt các dependencies và tạo jar file thực thi
 RUN ./gradlew clean build
@@ -43,10 +43,10 @@ ENV SPRING_PROFILES_ACTIVE=dev
 WORKDIR /app
 
 # Sao chép mã nguồn ứng dụng
-COPY --from=builder /app/bookservice/build/libs/*.jar bookservice.jar
+COPY --from=builder /app/notificationservice/build/libs/*.jar notificationservice.jar
 
-# Mở cổng 8761
-EXPOSE 9001
+# Mở cổng 9003
+EXPOSE 9003
 
 # Lệnh mặc định để chạy ứng dụng khi container khởi động
-ENTRYPOINT [ "java", "-jar" , "bookservice.jar"]
+ENTRYPOINT [ "java", "-jar" , "notificationservice.jar"]

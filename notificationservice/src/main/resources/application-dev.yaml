@@ -9,6 +9,6 @@ spring:
     consumer:
       group-id: ltfullstack
 
-#axon:
-#  axonserver:
-#    servers: localhost:8124 # Connect to Axon Server on this address
+axon:
+  axonserver:
+    servers: axonserver:8124 # Connect to Axon Server on this address

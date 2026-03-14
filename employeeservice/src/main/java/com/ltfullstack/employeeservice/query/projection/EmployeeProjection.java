@@ -1,10 +1,11 @@
 package com.ltfullstack.employeeservice.query.projection;
 
+import com.ltfullstack.commonservice.model.EmployeeResponseCommonModel;
+import com.ltfullstack.commonservice.queries.GetDetailEmployeeQuery;
 import com.ltfullstack.employeeservice.command.data.Employee;
 import com.ltfullstack.employeeservice.command.data.EmployeeRepository;
 import com.ltfullstack.employeeservice.query.model.EmployeeResponseModel;
 import com.ltfullstack.employeeservice.query.quries.GetAllEmployeeQuery;
-import com.ltfullstack.employeeservice.query.quries.GetDetailEmployeeQuery;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,23 +20,20 @@ public class EmployeeProjection {
     private EmployeeRepository employeeRepository;
 
     @QueryHandler
-    public List<EmployeeResponseModel> handle(GetAllEmployeeQuery query) {
-        List<Employee> employees = employeeRepository.findAllByIsDisciplined(query.getIsDisciplined());
-
-        return employees.stream().map(employee -> {
-            EmployeeResponseModel responseModel = new EmployeeResponseModel();
-            BeanUtils.copyProperties(employee, responseModel);
-            return responseModel;
+    public List<EmployeeResponseModel> handle(GetAllEmployeeQuery query){
+        List<Employee> listEmployee = employeeRepository.findAllByIsDisciplined(query.getIsDisciplined());
+        return listEmployee.stream().map(employee -> {
+            EmployeeResponseModel model = new EmployeeResponseModel();
+            BeanUtils.copyProperties(employee,model);
+            return model;
         }).toList();
     }
 
     @QueryHandler
-    public EmployeeResponseModel handle(GetDetailEmployeeQuery query) throws Exception {
-        Employee employee = employeeRepository.findById(query.getId())
-                .orElseThrow(() -> new Exception("Employee not found"));
-
-        EmployeeResponseModel responseModel = new EmployeeResponseModel();
-        BeanUtils.copyProperties(employee, responseModel);
-        return responseModel;
+    public EmployeeResponseCommonModel handle(GetDetailEmployeeQuery query) throws Exception{
+        Employee employee = employeeRepository.findById(query.getId()).orElseThrow(() -> new Exception("Employee not found"));
+        EmployeeResponseCommonModel model = new EmployeeResponseCommonModel();
+        BeanUtils.copyProperties(employee,model);
+        return model;
     }
 }

@@ -3,7 +3,7 @@ plugins {
 	id 'maven-publish'
 	id 'java'
 	id 'org.springframework.boot' version '3.3.1'
-	id 'io.spring.dependency-management' version '1.1.7'
+	id 'io.spring.dependency-management' version '1.1.5'
 
 //	id 'java-library'
 //	id 'maven-publish'
@@ -56,6 +56,9 @@ dependencies {
 
 	// Using 'api' makes spring-kafka available to any service that depends on 'common'
 	api 'org.springframework.kafka:spring-kafka'
+
+	// axon-spring-boot-starter
+	implementation("org.axonframework:axon-spring-boot-starter:4.9.3")
 
 	// spring-boot-starter-aop
 	implementation("org.springframework.boot:spring-boot-starter-aop")

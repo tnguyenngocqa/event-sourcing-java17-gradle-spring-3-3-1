@@ -27,21 +27,17 @@ repositories {
 }
 
 ext {
-    set('springCloudVersion', "2023.0.2")
+	set('springCloudVersion', "2023.0.2")
 }
 
 dependencies {
 	// commonservice
 	implementation("com.ltfullstack:commonservice:1.0.0")
+	// axon-spring-boot-starter
+	implementation("org.axonframework:axon-spring-boot-starter:4.9.3")
 
-	// spring-boot-starter-validation
-	implementation("org.springframework.boot:spring-boot-starter-validation")
-
-    // axon-spring-boot-starter
-    implementation("org.axonframework:axon-spring-boot-starter:4.9.3")
-
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 	compileOnly 'org.projectlombok:lombok'

@@ -1,4 +1,4 @@
-package com.ltfullstack.bookservice.query.model;
+package com.ltfullstack.commonservice.model;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class BookResponseModel {
+public class BookResponseCommonModel {
     String id;
     String name;
     String author;

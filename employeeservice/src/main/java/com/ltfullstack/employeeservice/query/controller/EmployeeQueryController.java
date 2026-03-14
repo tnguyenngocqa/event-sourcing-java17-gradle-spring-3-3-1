@@ -1,8 +1,8 @@
 package com.ltfullstack.employeeservice.query.controller;
 
+import com.ltfullstack.commonservice.queries.GetDetailEmployeeQuery;
 import com.ltfullstack.employeeservice.query.model.EmployeeResponseModel;
 import com.ltfullstack.employeeservice.query.quries.GetAllEmployeeQuery;
-import com.ltfullstack.employeeservice.query.quries.GetDetailEmployeeQuery;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
